@@ -27,19 +27,23 @@ namespace Snake
 
         public void Move(Apple apple = Apple.NonExist)
         {
-            var last = Body.Last.Value;
+            var (y, x) = Body.Last.Value;
 
             var newBody = Head switch
             {
-                Direction.Left => (last.Y, last.X - 1),
-                Direction.Right => (last.Y, last.X + 1),
-                Direction.Up => (last.Y - 1, last.X),
-                Direction.Down => (last.Y + 1, last.X),
+                Direction.Left => (y, x - 1),
+                Direction.Right => (y, x + 1),
+                Direction.Up => (y - 1, x),
+                Direction.Down => (y + 1, x),
                 _ => throw new Exception()
             };
 
             Body.AddLast(newBody);
-            Body.RemoveFirst();
+
+            if (apple == Apple.NonExist)
+            {
+                Body.RemoveFirst();
+            }
         }
     }
 }
