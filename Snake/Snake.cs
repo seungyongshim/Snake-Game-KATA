@@ -12,16 +12,28 @@ namespace Snake
     {
         public Snake(int initY, int initX)
         {
-            Body.Enqueue((initY, initX));
+            Body.AddLast((initY, initX));
         }
 
-        public Queue<(int, int)> Body { get; set; } = new Queue<(int, int)>();
+        public LinkedList<(int Y, int X)> Body { get; set; } = new LinkedList<(int, int)>();
 
         public Direction Head { get; set; } = Direction.Right;
 
         public void Move()
         {
-            throw new NotImplementedException();
+            var last = Body.Last.Value;
+
+            var newBody = Head switch
+            {
+                Direction.Left => (last.Y, last.X - 1),
+                Direction.Right => (last.Y, last.X + 1),
+                Direction.Up => (last.Y - 1, last.X),
+                Direction.Down => (last.Y + 1, last.X),
+                _ => throw new Exception()
+            };
+
+            Body.AddLast(newBody);
+            Body.RemoveFirst();
         }
     }
 }
