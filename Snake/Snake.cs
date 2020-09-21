@@ -3,6 +3,12 @@ using System.Collections.Generic;
 
 namespace Snake
 {
+    public enum Apple
+    {
+        Exist,
+        NonExist
+    }
+
     public enum Direction
     {
         Left, Right, Up, Down
@@ -19,7 +25,7 @@ namespace Snake
 
         public Direction Head { get; set; } = Direction.Right;
 
-        public void Move()
+        public void Move(Apple apple = Apple.NonExist)
         {
             var last = Body.Last.Value;
 
