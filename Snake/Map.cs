@@ -58,5 +58,10 @@ namespace Snake
             Snake = new Snake(Math.Abs(Width / 2), Math.Abs(Height / 2));
             Snake.Move(Apple.Exist);
         }
+
+        public void SnakeMove()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

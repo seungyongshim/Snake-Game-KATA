@@ -6,7 +6,18 @@ namespace Snake
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var map = new Map(10, 10);
+            map.GenerateSnake();
+
+            do
+            {
+                
+                map.ToString();
+
+
+                
+
+            } while (true);
         }
     }
 }

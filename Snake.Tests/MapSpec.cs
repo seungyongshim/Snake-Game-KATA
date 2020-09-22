@@ -43,5 +43,25 @@ namespace Snake.Tests
                                        ". . . . . \n" +
                                        ". . . . . \n");
         }
+
+        [Fact]
+        public void Should_Be_Move_Snake()
+        {
+            // arrange 
+            var map = new Map(5, 5);
+
+            // act
+            map.GenerateSnake();
+            map.SnakeMove();
+
+            // assert
+            map.ToString().Should().Be(". . . . . \n" +
+                                       ". . . . . \n" +
+                                       ". . . O O \n" +
+                                       ". . . . . \n" +
+                                       ". . . . . \n");
+        }
+
+        
     }
 }
