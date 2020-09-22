@@ -26,5 +26,22 @@ namespace Snake.Tests
                                        ". . . . . \n" +
                                        ". . . . . \n");
         }
+
+        [Fact]
+        public void Should_Be_Make_Snake()
+        {
+            // arrange 
+            var map = new Map(5, 5);
+
+            // act
+            map.GenerateSnake();
+
+            // assert
+            map.ToString().Should().Be(". . . . . \n" +
+                                       ". . . . . \n" +
+                                       ". . O O . \n" +
+                                       ". . . . . \n" +
+                                       ". . . . . \n");
+        }
     }
 }
