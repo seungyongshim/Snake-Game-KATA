@@ -61,7 +61,7 @@ namespace Snake
 
         public void SnakeMove()
         {
-            throw new NotImplementedException();
+            Snake.Move();
         }
     }
 }
