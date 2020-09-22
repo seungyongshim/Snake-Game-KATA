@@ -20,11 +20,11 @@ namespace Snake.Tests
 
 
             // assert
-            map.ToString().Should().Be(". . . . . \n" +
-                                       ". . . . . \n" +
-                                       ". . . . . \n" +
-                                       ". . . . . \n" +
-                                       ". . . . . \n");
+            map.ToString().Should().Be(". . . . .\n" +
+                                       ". . . . .\n" +
+                                       ". . . . .\n" +
+                                       ". . . . .\n" +
+                                       ". . . . .\n");
         }
 
         [Fact]
@@ -37,11 +37,11 @@ namespace Snake.Tests
             map.GenerateSnake();
 
             // assert
-            map.ToString().Should().Be(". . . . . \n" +
-                                       ". . . . . \n" +
-                                       ". . O O . \n" +
-                                       ". . . . . \n" +
-                                       ". . . . . \n");
+            map.ToString().Should().Be(". . . . .\n" +
+                                       ". . . . .\n" +
+                                       ". . O O .\n" +
+                                       ". . . . .\n" +
+                                       ". . . . .\n");
         }
 
         [Fact]
@@ -55,11 +55,11 @@ namespace Snake.Tests
             map.SnakeMove();
 
             // assert
-            map.ToString().Should().Be(". . . . . \n" +
-                                       ". . . . . \n" +
-                                       ". . . O O \n" +
-                                       ". . . . . \n" +
-                                       ". . . . . \n");
+            map.ToString().Should().Be(". . . . .\n" +
+                                       ". . . . .\n" +
+                                       ". . . O O\n" +
+                                       ". . . . .\n" +
+                                       ". . . . .\n");
         }
 
         

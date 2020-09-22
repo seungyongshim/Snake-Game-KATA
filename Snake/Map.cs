@@ -34,7 +34,7 @@ namespace Snake
                 }
             }
 
-            return Items.Select(y => y.Aggregate(Empty, (c, i) => c + i + " "))
+            return Items.Select(y => Join(" ", y.Select(x => x.ToString())))
                         .Aggregate(Empty, (c, i) => c + i + "\n");
         }
 
