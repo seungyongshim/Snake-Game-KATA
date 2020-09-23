@@ -7,7 +7,7 @@ namespace Snake.Tests
     public class SnakeSpec
     {
         [Fact]
-        public void Should_Be_Move_Down()
+        public void Move_Down()
         {
             // arrange
             var snake = new Snake(4, 7)
@@ -23,7 +23,7 @@ namespace Snake.Tests
         }
 
         [Fact]
-        public void Should_Be_Move_Down_And_Eat_Apple()
+        public void Move_Down_And_Eat_Apple()
         {
             // arrange
             var snake = new Snake(4, 7)
@@ -39,7 +39,7 @@ namespace Snake.Tests
         }
 
         [Fact]
-        public void Should_Be_Move_Left()
+        public void Move_Left()
         {
             // arrange
             var snake = new Snake(4, 5)
@@ -55,7 +55,7 @@ namespace Snake.Tests
         }
 
         [Fact]
-        public void Should_Be_Move_Left_And_Eat_Apple()
+        public void Move_Left_And_Eat_Apple()
         {
             // arrange
             var snake = new Snake(4, 5)
@@ -71,7 +71,7 @@ namespace Snake.Tests
         }
 
         [Fact]
-        public void Should_Be_Move_Right()
+        public void Move_Right()
         {
             // arrange
             var snake = new Snake(5, 5);
@@ -84,7 +84,7 @@ namespace Snake.Tests
         }
 
         [Fact]
-        public void Should_Be_Move_Right_And_Eat_Apple()
+        public void Move_Right_And_Eat_Apple()
         {
             // arrange
             var snake = new Snake(5, 5);
@@ -97,7 +97,7 @@ namespace Snake.Tests
         }
 
         [Fact]
-        public void Should_Be_Move_Up()
+        public void Move_Up()
         {
             // arrange
             var snake = new Snake(2, 3)
@@ -113,7 +113,7 @@ namespace Snake.Tests
         }
 
         [Fact]
-        public void Should_Be_Move_Up_And_Eat_Apple()
+        public void Move_Up_And_Eat_Apple()
         {
             // arrange
             var snake = new Snake(2, 3)
