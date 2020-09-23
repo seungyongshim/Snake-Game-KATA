@@ -6,7 +6,7 @@ namespace Snake
     {
         static void Main(string[] args)
         {
-            var map = new Map(10, 10);
+            var map = new Map(20, 20);
             map.GenerateSnake();
             Console.CursorVisible = false;
 
@@ -24,10 +24,10 @@ namespace Snake
                     ConsoleKey.DownArrow => Direction.Down,
                     ConsoleKey.LeftArrow => Direction.Left,
                     ConsoleKey.RightArrow => Direction.Right,
-                    _ => map.Snake.Head,
+                    _ => map.Snake.Direction,
                 };
 
-                map.Snake.Head = direction;
+                map.Snake.SetDirection(direction);
 
                 map.SnakeMove();
                 

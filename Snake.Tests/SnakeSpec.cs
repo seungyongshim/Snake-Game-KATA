@@ -12,7 +12,7 @@ namespace Snake.Tests
             // arrange
             var snake = new Snake(4, 7)
             {
-                Head = Direction.Down
+                Direction = Direction.Down
             };
 
             // act
@@ -28,7 +28,7 @@ namespace Snake.Tests
             // arrange
             var snake = new Snake(4, 7)
             {
-                Head = Direction.Down
+                Direction = Direction.Down
             };
 
             // act
@@ -44,7 +44,7 @@ namespace Snake.Tests
             // arrange
             var snake = new Snake(4, 5)
             {
-                Head = Direction.Left
+                Direction = Direction.Left
             };
 
             // act
@@ -60,7 +60,7 @@ namespace Snake.Tests
             // arrange
             var snake = new Snake(4, 5)
             {
-                Head = Direction.Left
+                Direction = Direction.Left
             };
 
             // act
@@ -102,7 +102,7 @@ namespace Snake.Tests
             // arrange
             var snake = new Snake(2, 3)
             {
-                Head = Direction.Up
+                Direction = Direction.Up
             };
 
             // act
@@ -118,7 +118,7 @@ namespace Snake.Tests
             // arrange
             var snake = new Snake(2, 3)
             {
-                Head = Direction.Up
+                Direction = Direction.Up
             };
 
             // act
