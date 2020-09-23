@@ -7,6 +7,8 @@ namespace Snake
 
     public class Map
     {
+        
+
         public Map(int height, int width)
         {
             Height = height;
@@ -16,7 +18,7 @@ namespace Snake
         public int Height { get; }
         public int Width { get; }
         public Snake Snake { get; private set; }
-        public (int Y ,int X)? ApplePos { get; internal set; }
+        public (int Y, int X) ApplePos { get; internal set; }
 
         public override string ToString()
         {
@@ -35,9 +37,9 @@ namespace Snake
                 }
             }
 
-            if (ApplePos != null)
+            if (ApplePos != default)
             {
-                Items[ApplePos.Value.Y][ApplePos.Value.X].SetApple();
+                Items[ApplePos.Y][ApplePos.X].SetApple();
             }
 
             return Items.Select(y => Join(" ", y.Select(x => x.ToString())))
@@ -87,13 +89,21 @@ namespace Snake
 
         public void GenerateSnake()
         {
-            Snake = new Snake(Math.Abs(Width / 2), Math.Abs(Height / 2));
-            Snake.Move(Apple.Exist);
+            var x = Math.Abs(Width / 2);
+            var y = Math.Abs(Height / 2);
+
+            Snake = new Snake(y, x);
+            Snake.Move((y, x + 1));
         }
 
-        public void SnakeMove()
+        public bool SnakeMove()
         {
-            Snake.Move();
+            if(Snake.Move(ApplePos))
+            {
+                MakeApple();
+            }
+
+            return true;
         }
     }
 }

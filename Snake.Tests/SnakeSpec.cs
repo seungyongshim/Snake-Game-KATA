@@ -32,7 +32,7 @@ namespace Snake.Tests
             };
 
             // act
-            snake.Move(Apple.Exist);
+            snake.Move((5, 7));
 
             // assert
             snake.Body.ToArray().Should().BeEquivalentTo(new[] { (4, 7), (5, 7) });
@@ -64,7 +64,7 @@ namespace Snake.Tests
             };
 
             // act
-            snake.Move(Apple.Exist);
+            snake.Move((4, 4));
 
             // assert
             snake.Body.ToArray().Should().BeEquivalentTo(new[] { (4, 5), (4, 4) });
@@ -90,7 +90,7 @@ namespace Snake.Tests
             var snake = new Snake(5, 5);
 
             // act
-            snake.Move(Apple.Exist);
+            snake.Move((5, 6));
 
             // assert
             snake.Body.ToArray().Should().BeEquivalentTo(new[] { (5, 5), (5, 6) });
@@ -122,7 +122,7 @@ namespace Snake.Tests
             };
 
             // act
-            snake.Move(Apple.Exist);
+            snake.Move((1, 3));
 
             // assert
             snake.Body.ToArray().Should().BeEquivalentTo(new[] { (2, 3), (1, 3) });

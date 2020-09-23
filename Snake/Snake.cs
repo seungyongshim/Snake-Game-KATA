@@ -7,12 +7,6 @@ using System.Runtime.CompilerServices;
 
 namespace Snake
 {
-    public enum Apple
-    {
-        Exist,
-        NonExist
-    }
-
     public enum Direction
     {
         Left, Right, Up, Down
@@ -45,7 +39,7 @@ namespace Snake
             Direction = direction;
         }
 
-        public void Move(Apple apple = Apple.NonExist)
+        public bool Move((int, int) apple = default)
         {
             var (y, x) = Body.Last.Value;
 
@@ -58,12 +52,18 @@ namespace Snake
                 _ => throw new Exception()
             };
 
-            Body.AddLast(newBody);
-
-            if (apple == Apple.NonExist)
+            if (newBody != apple)
             {
                 Body.RemoveFirst();
             }
+
+            Body.AddLast(newBody);
+
+            if (newBody != apple)
+                return false;
+
+            return true;
+            
         }
     }
 }

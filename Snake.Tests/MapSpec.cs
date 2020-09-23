@@ -73,7 +73,13 @@ namespace Snake.Tests
             map.MakeApple();
 
             // assert
-            map.ApplePos.Should().NotBeNull();
+            map.ApplePos.Should().NotBe(default);
+        }
+
+        [Fact]
+        public void TupleDefaultUnderstanding()
+        {
+            (0, 0).Should().Equals(default);
         }
     }
 }

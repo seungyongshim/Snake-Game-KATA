@@ -18,13 +18,12 @@ namespace Snake
                 {
                     do
                     {
+                        await Task.Delay(66);
+
                         Console.SetCursorPosition(0, 0);
                         Console.WriteLine(map.ToString());
 
-                        map.SnakeMove();
-                        await Task.Delay(70);
-
-                    } while (true);
+                    } while (map.SnakeMove());
                 }
                 catch (Exception)
                 {
