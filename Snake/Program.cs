@@ -9,6 +9,7 @@ namespace Snake
         {
             var map = new Map(25, 25);
             map.GenerateSnake();
+            map.MakeApple();
             Console.CursorVisible = false;
 
             var drawTask = Task.Run(async () =>

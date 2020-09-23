@@ -16,7 +16,7 @@ namespace Snake
         public int Height { get; }
         public int Width { get; }
         public Snake Snake { get; private set; }
-        public (int,int)? ApplePos { get; internal set; }
+        public (int Y ,int X)? ApplePos { get; internal set; }
 
         public override string ToString()
         {
@@ -35,27 +35,53 @@ namespace Snake
                 }
             }
 
+            if (ApplePos != null)
+            {
+                Items[ApplePos.Value.Y][ApplePos.Value.X].SetApple();
+            }
+
             return Items.Select(y => Join(" ", y.Select(x => x.ToString())))
                         .Aggregate(Empty, (c, i) => c + i + "\n");
         }
 
         public void MakeApple()
         {
+            var Rand = new Random();
 
+            (int, int) make()
+            {
+                var apple = (Rand.Next(0, Height), Rand.Next(0, Width));
+
+                if (Snake.Body.Any(x => x == apple))
+                {
+                    return make();
+                }
+
+                return apple;
+            }
+
+            ApplePos = make();
         }
 
         public struct Item
         {
             public bool IsSnake { get; private set; }
+            public bool IsApple { get; private set; }
 
             public override string ToString()
             {
-                return IsSnake? "O": ".";
+                return IsSnake? "O": 
+                       IsApple? "@": ".";
             }
 
             public void SetSnake()
             {
                 IsSnake = true;
+            }
+
+            internal void SetApple()
+            {
+                IsApple = true;
             }
         }
 
