@@ -16,6 +16,7 @@ namespace Snake
         public int Height { get; }
         public int Width { get; }
         public Snake Snake { get; private set; }
+        public (int,int)? ApplePos { get; internal set; }
 
         public override string ToString()
         {
@@ -36,6 +37,11 @@ namespace Snake
 
             return Items.Select(y => Join(" ", y.Select(x => x.ToString())))
                         .Aggregate(Empty, (c, i) => c + i + "\n");
+        }
+
+        public void MakeApple()
+        {
+
         }
 
         public struct Item

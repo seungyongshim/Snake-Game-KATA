@@ -11,7 +11,7 @@ namespace Snake.Tests
     public class MapSpec
     {
         [Fact]
-        public void Should_Be_Make_Map()
+        public void Make_Map()
         {
             // arrange 
             var map = new Map(5, 5);
@@ -28,7 +28,7 @@ namespace Snake.Tests
         }
 
         [Fact]
-        public void Should_Be_Make_Snake()
+        public void Make_Snake()
         {
             // arrange 
             var map = new Map(5, 5);
@@ -45,7 +45,7 @@ namespace Snake.Tests
         }
 
         [Fact]
-        public void Should_Be_Move_Snake()
+        public void Move_Snake()
         {
             // arrange 
             var map = new Map(5, 5);
@@ -62,6 +62,18 @@ namespace Snake.Tests
                                        ". . . . .\n");
         }
 
-        
+        [Fact]        
+        public void Make_Apple()
+        {
+            // arrange 
+            var map = new Map(5, 5);
+
+            // act
+            map.GenerateSnake();
+            map.MakeApple();
+
+            // assert
+            map.ApplePos.Should().NotBeNull();
+        }
     }
 }
