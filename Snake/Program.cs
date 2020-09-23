@@ -13,15 +13,23 @@ namespace Snake
 
             var drawTask = Task.Run(async () =>
             {
-                while (true)
+                try
                 {
+                    do
+                    {
+                        Console.SetCursorPosition(0, 0);
+                        Console.WriteLine(map.ToString());
 
-                    Console.SetCursorPosition(0, 0);
-                    Console.WriteLine(map.ToString());
+                        map.SnakeMove();
+                        await Task.Delay(70);
 
-                    map.SnakeMove();
-                    await Task.Delay(70);
+                    } while (true);
                 }
+                catch (Exception)
+                {
+                }
+
+                Console.WriteLine("GameOver");
             });
 
             while (true)
