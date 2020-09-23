@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Snake
 {
@@ -6,16 +7,25 @@ namespace Snake
     {
         static void Main(string[] args)
         {
-            var map = new Map(20, 20);
+            var map = new Map(25, 25);
             map.GenerateSnake();
             Console.CursorVisible = false;
 
-            do
+            var drawTask = Task.Run(async () =>
             {
-                
-                Console.SetCursorPosition(0, 0);
-                Console.WriteLine(map.ToString());
+                while (true)
+                {
 
+                    Console.SetCursorPosition(0, 0);
+                    Console.WriteLine(map.ToString());
+
+                    map.SnakeMove();
+                    await Task.Delay(70);
+                }
+            });
+
+            while (true)
+            {
                 var key = Console.ReadKey();
 
                 var direction = key.Key switch
@@ -28,11 +38,7 @@ namespace Snake
                 };
 
                 map.Snake.SetDirection(direction);
-
-                map.SnakeMove();
-                
-
-            } while (true);
+            }
         }
     }
 }
