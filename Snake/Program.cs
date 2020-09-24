@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Akka;
+using Akka.Actor;
+using System;
 using System.Threading.Tasks;
 
 namespace Snake
@@ -7,48 +9,14 @@ namespace Snake
     {
         static void Main(string[] args)
         {
-            var map = new Map(25, 25);
-            map.GenerateSnake();
-            map.MakeApple();
-            Console.CursorVisible = false;
+            var akka = ActorSystem.Create("snake");
 
-            var drawTask = Task.Run(async () =>
-            {
-                try
-                {
-                    do
-                    {
-                        await Task.Delay(66);
+            var snakeActor = akka.ActorOf(SnakeActor.Props(new Snake(12, 12)));
+            var mapActor = akka.ActorOf(MapActor.Props(new Map(25, 25)));
+            var keyboardActor = akka.ActorOf(KeyBoardActor.Props());
+            var consoleRenderActor = akka.ActorOf(ConsoleRenderActor.Props());
 
-                        Console.SetCursorPosition(0, 0);
-                        Console.WriteLine(map.ToString());
-
-                        map.SnakeMove();
-
-                    } while (map.IsNotGameOver);
-                }
-                catch (Exception)
-                {
-                }
-
-                Console.WriteLine("GameOver");
-            });
-
-            while (true)
-            {
-                var key = Console.ReadKey();
-
-                var direction = key.Key switch
-                {
-                    ConsoleKey.UpArrow => Direction.Up,
-                    ConsoleKey.DownArrow => Direction.Down,
-                    ConsoleKey.LeftArrow => Direction.Left,
-                    ConsoleKey.RightArrow => Direction.Right,
-                    _ => map.Snake.Direction,
-                };
-
-                map.Snake.SetDirection(direction);
-            }
+            akka.WhenTerminated.Wait();
         }
     }
 }
