@@ -19,6 +19,7 @@ namespace Snake
         public int Width { get; }
         public Snake Snake { get; private set; }
         public (int Y, int X) ApplePos { get; internal set; }
+        public bool IsNotGameOver { get; internal set; } = true;
 
         public override string ToString()
         {
@@ -96,14 +97,17 @@ namespace Snake
             Snake.Move((y, x + 1));
         }
 
-        public bool SnakeMove()
+        public void SnakeMove()
         {
-            if(Snake.Move(ApplePos))
+            var (ateApple, crashBody) = Snake.Move(ApplePos);
+
+            if (ateApple)
             {
                 MakeApple();
             }
 
-            return true;
+            IsNotGameOver = !crashBody;
+            
         }
     }
 }

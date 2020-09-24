@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 
 [assembly:InternalsVisibleToAttribute("Snake.Tests")]
@@ -39,7 +40,7 @@ namespace Snake
             Direction = direction;
         }
 
-        public bool Move((int, int) apple = default)
+        public (bool AteApple, bool CrashBody) Move((int, int) apple = default)
         {
             var (y, x) = Body.Last.Value;
 
@@ -52,18 +53,16 @@ namespace Snake
                 _ => throw new Exception()
             };
 
-            if (newBody != apple)
-            {
+            bool ateApple = newBody == apple;
+
+            if (!ateApple)
                 Body.RemoveFirst();
-            }
+
+            bool crashBody = Body.Any(x => x == newBody);
 
             Body.AddLast(newBody);
 
-            if (newBody != apple)
-                return false;
-
-            return true;
-            
+            return (ateApple, crashBody);
         }
     }
 }

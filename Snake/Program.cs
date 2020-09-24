@@ -23,7 +23,9 @@ namespace Snake
                         Console.SetCursorPosition(0, 0);
                         Console.WriteLine(map.ToString());
 
-                    } while (map.SnakeMove());
+                        map.SnakeMove();
+
+                    } while (map.IsNotGameOver);
                 }
                 catch (Exception)
                 {
