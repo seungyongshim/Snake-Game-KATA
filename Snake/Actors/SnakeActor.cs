@@ -14,10 +14,10 @@ namespace Snake
             Receive<Move>(Handle);
         }
 
-        private void Handle(Move _)
+        private void Handle(Move msg)
         {
-            Snake.Move();
-            Sender.Tell(Snake);
+            Snake.Move(msg.Apple);
+            Sender.Tell(Snake.Clone());
         }
 
         private void Handle(Direction direciton)

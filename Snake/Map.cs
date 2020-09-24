@@ -16,7 +16,7 @@ namespace Snake
 
         public int Height { get; }
         public int Width { get; }
-        public Snake Snake { get; private set; }
+        public ICollection<(int Y, int X)> SnakePos { get;  set; }
         public (int Y, int X) ApplePos { get; internal set; }
         public bool IsNotGameOver { get; internal set; } = true;
 
@@ -29,9 +29,9 @@ namespace Snake
         {
             var Items = new Item[Height, Width];
 
-            if (Snake != null)
+            if (SnakePos != null)
             {
-                foreach (var (y, x) in Snake.Body)
+                foreach (var (y, x) in SnakePos)
                 {
                     Items[y, x].SetSnake();
                 }
@@ -45,9 +45,9 @@ namespace Snake
             return Items.Cast<Item>();
         }
 
-        internal void Update(Snake snake)
+        internal void Update(ICollection<(int , int )> snakePos)
         {
-            Snake = snake;
+            SnakePos = snakePos;
         }
 
         public void MakeApple()
@@ -58,7 +58,7 @@ namespace Snake
             {
                 var apple = (Rand.Next(0, Height), Rand.Next(0, Width));
 
-                if (Snake.Body.Any(x => x == apple))
+                if (SnakePos.Any(x => x == apple))
                 {
                     return make();
                 }
@@ -89,28 +89,6 @@ namespace Snake
             {
                 IsApple = true;
             }
-        }
-
-        public void GenerateSnake()
-        {
-            var x = Math.Abs(Width / 2);
-            var y = Math.Abs(Height / 2);
-
-            Snake = new Snake(y, x);
-            Snake.Move((y, x + 1));
-        }
-
-        public void SnakeMove()
-        {
-            var (ateApple, crashBody) = Snake.Move(ApplePos);
-
-            if (ateApple)
-            {
-                MakeApple();
-            }
-
-            IsNotGameOver = !crashBody;
-            
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     internal class Move
     {
-        public static Move Instance { get; } = new Move();
+        public (int Y, int X) Apple { get; init; }
     }
 }

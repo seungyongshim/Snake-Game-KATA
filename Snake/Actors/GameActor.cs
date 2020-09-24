@@ -21,18 +21,23 @@ namespace Snake
                                                             Self);
 
             Receive<TickGame>(Handle);
-            Receive<Snake>(Handle);
+            Receive<SnakeResult>(Handle);
         }
 
-        private void Handle(Snake snake)
+        private void Handle(SnakeResult msg)
         {
-            Map.Update(snake);
-            ConsoleRenderActor.Tell(Map.GetResult().Select(x => x.ToString()).ToList());
+            Map.Update(msg.SnakePos);
+            ConsoleRenderActor.Tell(Map.GetResult()
+                                       .Select(x => x.ToString())
+                                       .ToList());
         }
 
         public void Handle(TickGame _)
         {
-            SnakeActor.Tell(Move.Instance);
+            SnakeActor.Tell(new Move
+            {
+                Apple = Map.ApplePos
+            });
         }
 
         public IActorRef SnakeActor { get; set; }

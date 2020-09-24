@@ -17,7 +17,7 @@ namespace Snake
         Down
     }
 
-    public class Snake
+    public class Snake 
     {
         static readonly ReadOnlyDictionary<Direction, Direction> Opposition = 
             new ReadOnlyDictionary<Direction, Direction>(new Dictionary<Direction, Direction>
@@ -31,6 +31,7 @@ namespace Snake
         public Snake(int initY, int initX)
         {
             Body.AddLast((initY, initX));
+            Body.AddLast((initY, initX + 1));
         }
 
         public LinkedList<(int Y, int X)> Body { get; set; } = new LinkedList<(int, int)>();
@@ -66,5 +67,8 @@ namespace Snake
 
             return (ateApple, crashBody);
         }
+
+        public Snake Clone() =>
+            MemberwiseClone() as Snake;
     }
 }

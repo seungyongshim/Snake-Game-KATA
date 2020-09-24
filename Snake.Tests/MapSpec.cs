@@ -30,24 +30,10 @@ namespace Snake.Tests
             var map = new Map(5, 5);
 
             // act
-            map.GenerateSnake();
+            map.Update( new Snake(2, 2).Body);
 
             // assert
             map.ToString().Should().Be(".,.,.,.,.,.,.,.,.,.,.,.,O,O,.,.,.,.,.,.,.,.,.,.,.");
-        }
-
-        [Fact]
-        public void Move_Snake()
-        {
-            // arrange 
-            var map = new Map(5, 5);
-
-            // act
-            map.GenerateSnake();
-            map.SnakeMove();
-
-            // assert
-            map.ToString().Should().Be(".,.,.,.,.,.,.,.,.,.,.,.,.,O,O,.,.,.,.,.,.,.,.,.,.");
         }
 
         [Fact]        
@@ -57,11 +43,8 @@ namespace Snake.Tests
             var map = new Map(5, 5);
 
             // act
-            map.GenerateSnake();
+            map.Update(new Snake(2, 2).Body);
             map.MakeApple();
-
-            // assert
-            map.ApplePos.Should().NotBe(default);
         }
 
         [Fact]
