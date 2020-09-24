@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Snake
@@ -7,8 +8,6 @@ namespace Snake
 
     public class Map
     {
-        
-
         public Map(int height, int width)
         {
             Height = height;
@@ -23,28 +22,32 @@ namespace Snake
 
         public override string ToString()
         {
-            var Items = new Item[Height][];
+            return Join(',', GetResult());
+        }
 
-            for (var i = 0; i < Height; i++)
-            {
-                Items[i] = new Item[Width];
-            }
+        internal IEnumerable<Item> GetResult()
+        {
+            var Items = new Item[Height, Width];
 
             if (Snake != null)
             {
                 foreach (var (y, x) in Snake.Body)
                 {
-                    Items[y][x].SetSnake();
+                    Items[y, x].SetSnake();
                 }
             }
 
             if (ApplePos != default)
             {
-                Items[ApplePos.Y][ApplePos.X].SetApple();
+                Items[ApplePos.Y, ApplePos.X].SetApple();
             }
 
-            return Items.Select(y => Join(" ", y.Select(x => x.ToString())))
-                        .Aggregate(Empty, (c, i) => c + i + "\n");
+            return Items.Cast<Item>();
+        }
+
+        internal void Update(Snake snake)
+        {
+            Snake = snake;
         }
 
         public void MakeApple()

@@ -10,7 +10,11 @@ namespace Snake
 {
     public enum Direction
     {
-        Left, Right, Up, Down
+        Default,
+        Left, 
+        Right, 
+        Up, 
+        Down
     }
 
     public class Snake
@@ -35,8 +39,6 @@ namespace Snake
 
         public void SetDirection(Direction direction)
         {
-            if (Opposition[Direction] == direction) return;
-
             Direction = direction;
         }
 

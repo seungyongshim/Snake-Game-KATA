@@ -20,11 +20,7 @@ namespace Snake.Tests
 
 
             // assert
-            map.ToString().Should().Be(". . . . .\n" +
-                                       ". . . . .\n" +
-                                       ". . . . .\n" +
-                                       ". . . . .\n" +
-                                       ". . . . .\n");
+            map.ToString().Should().Be(".,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.,.");
         }
 
         [Fact]
@@ -37,11 +33,7 @@ namespace Snake.Tests
             map.GenerateSnake();
 
             // assert
-            map.ToString().Should().Be(". . . . .\n" +
-                                       ". . . . .\n" +
-                                       ". . O O .\n" +
-                                       ". . . . .\n" +
-                                       ". . . . .\n");
+            map.ToString().Should().Be(".,.,.,.,.,.,.,.,.,.,.,.,O,O,.,.,.,.,.,.,.,.,.,.,.");
         }
 
         [Fact]
@@ -55,11 +47,7 @@ namespace Snake.Tests
             map.SnakeMove();
 
             // assert
-            map.ToString().Should().Be(". . . . .\n" +
-                                       ". . . . .\n" +
-                                       ". . . O O\n" +
-                                       ". . . . .\n" +
-                                       ". . . . .\n");
+            map.ToString().Should().Be(".,.,.,.,.,.,.,.,.,.,.,.,.,O,O,.,.,.,.,.,.,.,.,.,.");
         }
 
         [Fact]        

@@ -12,11 +12,25 @@ namespace Snake
             var akka = ActorSystem.Create("snake");
 
             var snakeActor = akka.ActorOf(SnakeActor.Props(new Snake(12, 12)));
-            var mapActor = akka.ActorOf(MapActor.Props(new Map(25, 25)));
-            var keyboardActor = akka.ActorOf(KeyBoardActor.Props());
-            var consoleRenderActor = akka.ActorOf(ConsoleRenderActor.Props());
+            var consoleRenderActor = akka.ActorOf(ConsoleRenderActor.Props(25, 25));
+            var gameActor = akka.ActorOf(GameActor.Props(new Map(25, 25), snakeActor, consoleRenderActor));
+            
 
-            akka.WhenTerminated.Wait();
+            while (true)
+            {
+                var key = Console.ReadKey();
+
+                var direction = key.Key switch
+                {
+                    ConsoleKey.UpArrow => Direction.Up,
+                    ConsoleKey.DownArrow => Direction.Down,
+                    ConsoleKey.LeftArrow => Direction.Left,
+                    ConsoleKey.RightArrow => Direction.Right,
+                    _ => default,
+                };
+
+                snakeActor.Tell(direction);
+            }
         }
     }
 }
