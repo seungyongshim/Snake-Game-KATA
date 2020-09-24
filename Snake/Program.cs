@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 
@@ -24,44 +25,32 @@ namespace Snake
             map.MakeApple();
             Console.CursorVisible = false;
 
-            var drawTask = Task.Run(async () =>
+            var keys = KeyPresses().ToObservable(/*ThreadPoolScheduler.Instance*/);
+            var render = Observable.Interval(TimeSpan.FromMilliseconds(60));
+
+            render.Subscribe(x =>
             {
-                try
-                {
-                    do
-                    {
-                        await Task.Delay(66);
+                Console.SetCursorPosition(0, 0);
+                Console.WriteLine(map.ToString());
 
-                        Console.SetCursorPosition(0, 0);
-                        Console.WriteLine(map.ToString());
-
-                        map.SnakeMove();
-
-                    } while (map.IsNotGameOver);
-                }
-                catch (Exception)
-                {
-                }
-
-                Console.WriteLine("GameOver");
+                map.SnakeMove();
             });
 
-            var keys = KeyPresses().ToObservable();
-
-            keys.Throttle(TimeSpan.FromMilliseconds(66))
-                .Subscribe(key =>
+            keys.Throttle(TimeSpan.FromMilliseconds(60))
+                .Select(x => x.Key switch 
                 {
-                    var direction = key.Key switch
-                    {
-                        ConsoleKey.UpArrow => Direction.Up,
-                        ConsoleKey.DownArrow => Direction.Down,
-                        ConsoleKey.LeftArrow => Direction.Left,
-                        ConsoleKey.RightArrow => Direction.Right,
-                        _ => map.Snake.Direction,
-                    };
-
-                    map.Snake.SetDirection(direction);
+                    ConsoleKey.UpArrow => Direction.Up,
+                    ConsoleKey.DownArrow => Direction.Down,
+                    ConsoleKey.LeftArrow => Direction.Left,
+                    ConsoleKey.RightArrow => Direction.Right,
+                    _ => default,
+                })
+                .Subscribe(x =>
+                {
+                    map.Snake.SetDirection(x);
                 });
+
+            // 프로그램이 중단되지 않는 이유는 KeyPresses()가 MainThread에서 호출되기 때문
         }
     }
 }
